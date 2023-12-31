@@ -28,12 +28,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3000')
-    .then(response => response.json())
-    .then(console.log)
-  }
-
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
@@ -68,20 +62,11 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
 
-
-    // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'a629694dfab9427fa2f5a7c213dbce95';
-    // Specify the correct user_id/app_id pairings
-    // Since you're making inferences outside your app's scope
-    const USER_ID = 'elisiolg';       
+    const USER_ID = 'elisiolg';
     const APP_ID = 'test';
-    // Change these to whatever model and image URL you want to use
     const MODEL_ID = 'face-detection';
     const IMAGE_URL = this.state.input;
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
-    ///////////////////////////////////////////////////////////////////////////////////
 
     const raw = JSON.stringify({
         "user_app_id": {
@@ -108,7 +93,6 @@ class App extends Component {
         body: raw
     };
 
-    //app.models.predict('face-detection', this.state.input)
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
     .then(response => response.json())
       .then(response => {
